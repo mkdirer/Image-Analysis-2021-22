@@ -1,0 +1,17 @@
+clear;clc;
+im = rgb2gray(double(imread('zubr.jpg'))/255);
+avgIm = .55;
+bim = imbinarize(im, avgIm);
+bim = ~bim;
+fim = imerode(bim, ones(3));
+fim2 = imdilate(bim, ones(3));
+%fim3 = imerode(fim2, ones(3));
+%fim3 = imopen(bim, ones(3));
+fim3 = imclose(bim, ones(3));
+imshow(bim);
+figure;
+imshow(fim);
+figure;
+imshow(fim2);
+figure;
+imshow(fim3);

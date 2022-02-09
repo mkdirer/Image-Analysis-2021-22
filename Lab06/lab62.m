@@ -1,0 +1,14 @@
+clear;clc;
+im = double(imread('ptaki.jpg'))/255;
+gim = rgb2gray(im);
+r = im(:, :, 1);
+b = im(:, :, 3);
+b = ~imbinarize(b, .6);
+r(r < .15) = 1;
+r = imbinarize(r, .3);
+bim = b | r;
+bim = imclose(bim, ones(5));
+bim = imopen(bim, ones(5));
+l = bwlabel(bim);
+n = max(l(:));
+prop = regionprops(l == 4, 'all');
